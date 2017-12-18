@@ -6,6 +6,7 @@ root "restaurants#index"
 namespace :admin do
     root "restaurants#index"
     resources :restaurants
+    resources :categories 
   end
 
 
