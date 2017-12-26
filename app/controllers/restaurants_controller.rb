@@ -2,8 +2,15 @@ class RestaurantsController < ApplicationController
 
   
   def index
-    @restaurants = Restaurant.page(params[:page]).per(9)
     @categories = Category.all
+    if 
+      params[:search]
+      @restaurants = Restaurant.where('name LIKE ?', "%#{params[:search]}%")
+      
+    else
+      @restaurants = Restaurant.page(params[:page]).per(9)
+      
+    end
   end
   
    def show

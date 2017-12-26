@@ -12,6 +12,10 @@
     <% end %>
       
     <!-- 有generate kaminari paginate bootstrap style -->
-    <div class="text-center">
-      <%= paginate @restaurants %>
-    </div>
+    <% if params[:search]%>
+    
+    <%else %>
+      <div class="text-center">
+        <%= paginate @restaurants %>
+      </div>
+      <%end%>

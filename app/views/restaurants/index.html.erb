@@ -11,8 +11,18 @@
       <li role = "presentation"><%= link_to category.name, category_path(category) %></li>
       <% end %>
     </ul>
+  
+    <div class="input-group">
+      <%= form_tag restaurants_path, method: :get do%>
+        <%= text_field_tag :search ,params[:search],placeholder:"Enter text.."%>
+        <%= submit_tag "搜尋"  ,name: nil,class: "btn btn-danger dropdown-toggle"%>
+        <%end%>
+    </div>
 
-    
+
+      
+
+
     <!-- restaurants list，有多寫restaurant-item的class style -->
     <%= render partial: "shared/restaurant_list" %>
       
