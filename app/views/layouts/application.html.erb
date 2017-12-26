@@ -9,22 +9,44 @@
   </head>
 
   <body>
-  
-  <div class="a">
-    <div class="alert alert-danger" role="alert">
-      <% if current_user%>
-                <% if current_user.admin? %>
-                    <%= link_to 'Admin後台', admin_restaurants_path %>
-                  <% end %>
-                <%= current_user.first_name %> 
-                <%= link_to 'Profile', user_path(current_user) %>
-        <%= link_to "Logout",destroy_user_session_path,method: :delete  %>
-      <% else %>
-        <%= link_to "Register",new_user_registration_path  %>
-        <%= link_to "Login",new_user_session_path %>
-      <% end %>
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to'餐廳評論網',restaurants_path,class: "navbar-brand" %>
     </div>
-  </div>
+      
+      <ul class="nav navbar-nav navbar-right">
+                
+        <% if current_user%>
+                  <% if current_user.admin? %>
+                      <li><%= link_to 'Admin後台', admin_restaurants_path,class: "active"%></li>
+                    <% end %>
+                  
+                  
+                  <p class="navbar-text"><%= current_user.first_name %></p>
+                  <li><%= link_to 'Profile', user_path(current_user),class: "glyphicon glyphicon-user"%></li>
+                  <li><%= link_to '修改密碼', edit_user_registration_path(current_user),class: "active"%></li>
+                  <li><%= link_to "Logout",destroy_user_session_path,method: :delete, class: "glyphicon glyphicon-log-out"  %></li>
+                  
+      </ul>           
+                 
+
+      
+
+
+     <%= form_tag restaurants_path, method: :get,class: "navbar-form navbar-left"  do%>
+        <%= text_field_tag :search ,params[:search],placeholder:"Enter text..", class: "form-control"%>
+        <%= submit_tag "搜尋"  ,name: nil,class: "btn btn-default"%>
+        <%end%>
+
+    
+      
+      <% end %>
+
+  </nav>
+  
+  
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
