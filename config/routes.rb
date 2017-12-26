@@ -6,6 +6,7 @@ resources :restaurants, only: [:index, :show] do
 end
 resources :categories, only: :show
 
+resources :users, only: [:update, :show, :edit]
 
 
 root "restaurants#index"

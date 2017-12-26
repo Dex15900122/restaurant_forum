@@ -20,12 +20,15 @@
       <%= simple_format @restaurant.description %>
     </div>
 
+
     <div class="clearfix"></div>
 
     <hr>
 
   </div>
 </div>
+
+<%= link_to "restauraut",restaurants_path  %>
 <% @restaurant.comments.each do |comment| %>
     <div>
       <h4><%= comment.user.name %></h4>
