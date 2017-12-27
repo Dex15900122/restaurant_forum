@@ -8,6 +8,8 @@ resources :restaurants, only: [:index, :show] do
   end
   member do
     get :dashboard
+    post :favorite
+    post :unfavorite
   end
 end
 resources :categories, only: :show
