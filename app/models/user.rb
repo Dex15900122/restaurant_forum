@@ -11,6 +11,9 @@ has_many :restaurants, through: :comments
 has_many :favorites, dependent: :destroy
 has_many :favorited_restaurants, through: :favorites, source: :restaurant
 
+has_many :lkes, dependent: :destroy
+has_many :liked_restaurants, through: :likes, source: :restaurant 
+
 
 
 

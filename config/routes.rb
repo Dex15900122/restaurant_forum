@@ -5,11 +5,14 @@ resources :restaurants, only: [:index, :show] do
   resources :comments, only: [:create, :destroy]
   collection do
     get :feeds
+    get :ranking
   end
   member do
     get :dashboard
     post :favorite
     post :unfavorite
+    post :like
+    post :unlike
   end
 end
 resources :categories, only: :show
