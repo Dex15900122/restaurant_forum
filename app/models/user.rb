@@ -13,10 +13,19 @@ has_many :favorited_restaurants, through: :favorites, source: :restaurant
 
 has_many :lkes, dependent: :destroy
 has_many :liked_restaurants, through: :likes, source: :restaurant 
+ # 「使用者追蹤使用者」的 self-referential relationships 設定
+ # 不需要另加 source，Rails 可從 Followship Model 設定來判斷 followings 指向 User Model
+has_many :followships, dependent: :destroy
+has_many :followings, through: :followships
+ # 透過 class_name, foreign_key 的自訂，指向 Followship 表上的另一側
+has_many :inverse_followships, class_name: "Followship",foreign_key: "following_id"
+has_many :followers, through: :inverse_followships, source: :user
 
+has_many :friendships, dependent: :destroy
+has_many :friends, through: :friendships
 
-
-
+has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id", dependent: :destroy
+has_many :inverse_friends, through: :inverse_friendships, source: :user
 
 
 
@@ -27,6 +36,22 @@ has_many :liked_restaurants, through: :likes, source: :restaurant
     self.role == "admin"
   
     end
+
+    def following?(user)
+      self.followings.include?(user)
+    end
+
+    def friending?(user)
+      self.friends.include?(user)
+
+    end
+
+    
+
+    def all_friends?(user)
+      self.friends.include?(user) || self.inverse_friends.include?(user)
+    end
+
 
 validates_presence_of :name
  
