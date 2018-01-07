@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @favorited_restaurants = @user.favorited_restaurants
     @followings = @user.followings
     @followers  =@user.followers
-    @friends = @user.friends
+    @friends = @user.friends_list
     @inverse_friends =  @user.inverse_friends
   end
 
