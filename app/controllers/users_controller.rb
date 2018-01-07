@@ -33,7 +33,15 @@ class UsersController < ApplicationController
      @friends = @user.friends
      @inverse_friends =  @user.inverse_friends
   end
-  
+  def friend_list
+    @user = User.find(params[:id])
+    # @all_friends = @user.all_friends
+    @friends_list = @user.friends_list
+    @sendrequests = @user.friends - @friends_list
+    #去除已經加入好友的名單
+    @getrequests = @user.inverse_friends - @friends_list
+    #去除已經加入好友的名單
+  end
 
   private
 

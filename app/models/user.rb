@@ -24,8 +24,9 @@ has_many :followers, through: :inverse_followships, source: :user
 has_many :friendships, dependent: :destroy
 has_many :friends, through: :friendships
 
-has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id", dependent: :destroy
-has_many :inverse_friends, through: :inverse_friendships, source: :user
+has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id" #反向的交友關係 fk為friend_id
+
+has_many :inverse_friends, through: :inverse_friendships, source: :user #加我好友的人
 
 
 
@@ -51,6 +52,22 @@ has_many :inverse_friends, through: :inverse_friendships, source: :user
     def all_friends?(user)
       self.friends.include?(user) || self.inverse_friends.include?(user)
     end
+
+    def friends?(user)
+    self.friends.include?(user)
+    end
+    def inverse_friends?(user)
+      self.inverse_friends.include?(user)
+    end
+
+    
+    def friends_list
+    list = []
+    self.friends.each do |friend|
+      list<<friend if self.inverse_friends.include?(friend)
+    end
+    return list
+    end 
 
 
 validates_presence_of :name
